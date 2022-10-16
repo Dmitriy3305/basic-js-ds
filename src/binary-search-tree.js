@@ -10,6 +10,9 @@ const { Node } = require('../extensions/list-tree.js');
 class BinarySearchTree {
 
   root() {
+    if (typeof (this.rootItem) == 'undefined') {
+      return null
+    }
     return this.rootItem;
   }
 
@@ -45,14 +48,64 @@ class BinarySearchTree {
         searchWithin(node.rightItem, data);
     }
   }
-  find(/* data */) {
-    throw new NotImplementedError('Not implemented');
-    // remove line with error and write your code here
+  find(data) {
+    return findWithin(this.rootItem, data)
+    function findWithin (node, data) {
+      if (typeof (data) == 'undefined') {
+        return null;
+      }
+      else if (node.data == data) {
+        return node;
+      }
+      else if (node.data > data) {
+        return findWithin(node.leftItem, data)
+      }
+      else if (!node) {
+        return null;
+      }
+      else {
+        return findWithin(node.rightItem, data)
+      }
+    }
   }
 
-  remove(/* data */) {
-    throw new NotImplementedError('Not implemented');
-    // remove line with error and write your code here
+  remove(data) {
+    this.root = removeNode(this.root, data);
+
+      function removeNode(node, data) {
+        if (!node) {
+          return null;
+        }
+
+        if (data < node.data) {
+          node.left = removeNode(node.leftItem, data);
+          return node;
+        } else if (node.data < data) {
+          node.rightItem = removeNode(node.rightItem, data);
+          return node;
+        } else {
+          if (!node.leftItem && !node.rightItem) {
+            return null;
+          }
+          if (!node.leftItem) {
+            node = node.rightItem;
+            return node;
+          }
+
+          if (!node.rightItem) {
+            node = node.leftItem;
+            return node;
+          }
+
+          let minFromRightItem = node.rightItem;
+          while (minFromRightItem.leftItem) {
+            minFromRightItem = minFromRightItem.leftItem;
+          }
+          node.data = minFromRightItem.data;
+          node.rightItem = removeNode(node.rightItem, minFromRightItem.data);
+          return node;
+        }
+      }
   }
 
   min() {
