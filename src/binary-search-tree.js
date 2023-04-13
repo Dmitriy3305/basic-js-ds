@@ -37,7 +37,7 @@ class BinarySearchTree {
   has(data) {
     return searchWithin(this.rootItem, data);
     function searchWithin(node, data) {
-      if (!node || node) {
+      if (!node) {
         return false;
       }
       if (node.data === data) {
