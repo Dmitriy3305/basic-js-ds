@@ -18,16 +18,13 @@ class Stack {
   }
   push(item) {
     this.stack.push(item);
-    // remove line with error and write your code here
   }
   pop() {
    return this.stack.pop();
-    // remove line with error and write your code here
   }
 
   peek() {
     return this.stack[this.stack.length - 1];
-    // remove line with error and write your code here
   }
 }
 

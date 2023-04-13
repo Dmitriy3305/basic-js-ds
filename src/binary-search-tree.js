@@ -37,7 +37,7 @@ class BinarySearchTree {
   has(data) {
     return searchWithin(this.rootItem, data);
     function searchWithin(node, data) {
-      if (!node) {
+      if (!node || node) {
         return false;
       }
       if (node.data === data) {
@@ -70,10 +70,10 @@ class BinarySearchTree {
   }
 
   remove(data) {
-    this.root = removeNode(this.root, data);
+    this.root = removeNode(this.rootItem, data);
 
       function removeNode(node, data) {
-        if (!node) {
+        if (node == null) {
           return null;
         }
 
